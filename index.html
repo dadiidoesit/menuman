@@ -15,7 +15,7 @@ body {
   background: #f4ede3;
   font-family: 'IM Fell English', Georgia, serif;
   color: #2c2418;
-  padding: 2rem 1rem 6rem;
+  padding: 2rem 1rem 100px;  /* extra bottom padding so footer doesn't obscure */
 }
 .container {
   max-width: 1400px;
@@ -139,8 +139,15 @@ td {
   vertical-align: middle;
 }
 .price-col {
-  font-weight: 700;
-  color: #7c5f3a;
+  font-weight: 800;
+  color: #4a2e1a;
+  background: #e9ddcf;
+  padding: 4px 12px;
+  border-radius: 24px;
+  display: inline-block;
+  font-family: 'Cinzel', monospace;
+  font-size: 0.9rem;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 2px rgba(0,0,0,0.05);
   white-space: nowrap;
 }
 .badge {
@@ -181,7 +188,34 @@ td {
   font-family: 'IM Fell English', serif;
   pointer-events: none;
 }
-.cart-footnote {
+/* floating cart toggle button - middle right */
+.cart-toggle-btn {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #ba8b4a;
+  color: white;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  cursor: pointer;
+  z-index: 1100;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  border: none;
+  font-family: 'Cinzel', serif;
+  transition: 0.2s;
+}
+.cart-toggle-btn:hover {
+  background: #9c6e38;
+  transform: translateY(-50%) scale(1.02);
+}
+/* cart panel */
+.cart-panel {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -198,14 +232,13 @@ td {
   font-family: 'IM Fell English', serif;
   backdrop-filter: blur(8px);
   box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
-  transition: all 0.2s;
-  max-height: 35vh;
+  transition: transform 0.3s ease;
+  transform: translateY(0);
+  max-height: 40vh;
   overflow-y: auto;
 }
-.cart-footnote.collapsed {
-  padding: 8px 20px;
-  max-height: 70px;
-  overflow-y: hidden;
+.cart-panel.hidden {
+  transform: translateY(100%);
 }
 .cart-summary {
   background: #3c332a;
@@ -263,17 +296,8 @@ td {
 .cart-actions button:hover {
   background: #9c6e38;
 }
-.minimize-btn {
-  background: #5f4a32;
-  color: #f0e0c0;
-  padding: 4px 12px;
-  border-radius: 40px;
-  font-size: 0.7rem;
-  cursor: pointer;
-  font-family: 'Cinzel', serif;
-}
 @media (max-width: 700px) {
-  .cart-footnote { flex-direction: column; align-items: stretch; padding: 12px; }
+  .cart-panel { flex-direction: column; align-items: stretch; padding: 12px; }
   .cart-summary { max-width: 100%; }
   .coin-split { justify-content: center; }
 }
@@ -303,7 +327,11 @@ td {
   <div id="catalogue"></div>
 </div>
 
-<div class="cart-footnote" id="cartFoot">
+<!-- Floating toggle button (middle right) -->
+<button id="cartToggleBtn" class="cart-toggle-btn">🛒</button>
+
+<!-- Cart panel -->
+<div id="cartPanel" class="cart-panel">
   <div class="cart-summary" id="cartSummary">🛒 Cart empty</div>
   <div class="cart-total" id="cartTotal">0 gp</div>
   <div class="coin-split" id="coinSplitGroup">
@@ -316,7 +344,6 @@ td {
   <div class="cart-actions">
     <button id="copyReceiptBtn">📋 Copy Receipt</button>
     <button id="clearCartBtn">Clear Cart</button>
-    <button id="minimizeCartBtn" class="minimize-btn">▼ Minimize</button>
   </div>
 </div>
 
@@ -361,7 +388,7 @@ const gear = [
   {name:"Poisoner's Kit", price:50, desc:"Vials, toxins", avail:"NQ", exotic:true, descFull:"Crafting and applying poisons."}
 ];
 const livestock = [
-  {name:"Cow (milk cow)", price:20, desc:"1 gallon milk/day"},
+  {name:"Cow (milk cow)", price:30, desc:"1 gallon milk/day"},
   {name:"Ox (draft)", price:30, desc:"Heavy pulling"},
   {name:"Pig", price:10, desc:"Fatten for slaughter / truffles"},
   {name:"Sheep", price:8, desc:"Wool once per season"},
@@ -441,6 +468,12 @@ const categories = [
   { id:"magic", title:"⭐ Magic Items (9 items)", items: magicItems }
 ];
 
+// ---------- Helper: format price without decimals if whole number ----------
+function formatPrice(value) {
+  if (value === Math.floor(value)) return `${value} gp`;
+  return `${value.toFixed(2)} gp`;
+}
+
 // ---------- CART ----------
 let cartMap = new Map();
 function addToCart(name, price) {
@@ -503,8 +536,9 @@ function updateCartUI() {
   } else {
     let html = "";
     for (let [name, entry] of cartMap.entries()) {
+      let itemTotal = entry.price * entry.quantity;
       html += `<span style="background:#3e3228; padding:4px 12px; border-radius:30px; display:inline-flex; gap:6px; align-items:center; margin:2px;">
-        ${entry.quantity}× ${name} (${(entry.price * entry.quantity).toFixed(2)} gp)
+        ${entry.quantity}× ${name} (${formatPrice(itemTotal)})
         <button class="remove-one" data-name="${name.replace(/"/g, '&quot;')}" style="background:none; border:none; color:#dba959; cursor:pointer;">−</button>
       </span>`;
     }
@@ -522,24 +556,34 @@ function copyReceipt() {
   if (cartMap.size === 0) { alert("Cart empty."); return; }
   let receipt = "🧾 TRADESMAN'S LEDGER RECEIPT\n--------------------------------\n";
   for (let [name, entry] of cartMap.entries()) {
-    receipt += `${entry.quantity} × ${name} — ${(entry.price * entry.quantity).toFixed(2)} gp\n`;
+    let itemTotal = entry.price * entry.quantity;
+    receipt += `${entry.quantity} × ${name} — ${formatPrice(itemTotal)}\n`;
   }
   receipt += "--------------------------------\n";
   receipt += `TOTAL: ${formatCoin(getTotalGold(), coinPref)}\nSplit: ${coinPref} first\nThank you!`;
-  navigator.clipboard.writeText(receipt).then(() => alert("Receipt copied!")).catch(() => alert("Failed."));
-}
-let collapsed = false;
-function toggleCart() {
-  const foot = document.getElementById('cartFoot');
-  const btn = document.getElementById('minimizeCartBtn');
-  if (collapsed) {
-    foot.classList.remove('collapsed');
-    btn.innerHTML = "▼ Minimize";
+  // Use modern clipboard API with fallback
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(receipt).then(() => alert("Receipt copied!")).catch(() => alert("Could not copy receipt."));
   } else {
-    foot.classList.add('collapsed');
-    btn.innerHTML = "▲ Expand";
+    // fallback for older browsers
+    const textarea = document.createElement("textarea");
+    textarea.value = receipt;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textarea);
+    alert("Receipt copied!");
   }
-  collapsed = !collapsed;
+}
+let cartVisible = true;
+function toggleCart() {
+  const panel = document.getElementById('cartPanel');
+  cartVisible = !cartVisible;
+  if (cartVisible) {
+    panel.classList.remove('hidden');
+  } else {
+    panel.classList.add('hidden');
+  }
 }
 
 // ---------- RENDER ----------
@@ -567,10 +611,10 @@ function renderCatalog(search = "") {
       }
       html += `<tr>
         <td>${displayName}${availHtml}</td>
-        <td class="price-col">${item.price.toFixed(2)} gp</td>
+        <td><span class="price-col">${formatPrice(item.price)}</span></td>
         <td class="nc">${detail}</td>
         <td><button class="add-to-cart" data-name="${item.name.replace(/"/g, '&quot;')}" data-price="${item.price}" style="background:#e7d9c8; border:none; border-radius:30px; width:32px; height:32px; font-size:1.2rem; cursor:pointer;">+</button></td>
-      <tr>`;
+      </tr>`;
     }
     html += `</tbody></table></div></div>`;
   }
@@ -607,7 +651,7 @@ document.querySelectorAll('[data-preference]').forEach(btn => {
 });
 document.getElementById('clearCartBtn').addEventListener('click', clearCart);
 document.getElementById('copyReceiptBtn').addEventListener('click', copyReceipt);
-document.getElementById('minimizeCartBtn').addEventListener('click', toggleCart);
+document.getElementById('cartToggleBtn').addEventListener('click', toggleCart);
 
 renderCatalog("");
 renderSideQuests();
