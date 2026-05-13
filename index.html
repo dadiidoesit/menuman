@@ -1,223 +1,617 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>The Tradesman's Ledger — Shop & Hire</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: #0e0e12; color: #c8c4d8; font-family: 'Crimson Text', Georgia, serif; padding: 40px 20px; min-height: 100vh; }
-  .page { max-width: 800px; margin: 0 auto; background: #16161e; border: 1px solid #2a2a3a; border-radius: 4px; padding: 48px 40px; box-shadow: 0 0 80px rgba(100,100,180,0.08); }
-  .header { text-align: center; border-bottom: 1px solid #2a2a3a; padding-bottom: 24px; margin-bottom: 8px; }
-  .header h1 { font-family: 'Cinzel', serif; font-size: 32px; color: #8888cc; letter-spacing: 3px; margin-bottom: 6px; }
-  .header .tagline { font-style: italic; color: #7070a0; font-size: 15px; margin-bottom: 10px; }
-  .header .motto { font-size: 11px; color: #50506a; letter-spacing: 1px; text-transform: uppercase; }
-  .disclaimer { background: #111118; border: 1px dashed #2a2a3a; padding: 10px 14px; margin: 16px 0 24px 0; font-size: 10px; color: #55556a; line-height: 1.5; text-align: justify; }
-  .disclaimer strong { color: #7070a0; }
-  .section-title { font-family: 'Cinzel', serif; font-size: 18px; color: #8888cc; letter-spacing: 2px; text-transform: uppercase; margin-top: 28px; margin-bottom: 14px; padding-bottom: 5px; border-bottom: 1px solid #22223a; }
-  .item { margin-bottom: 16px; padding: 10px 14px; background: #12121a; border-left: 3px solid #33336a; border-radius: 0 4px 4px 0; }
-  .item-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 3px; }
-  .item-name { font-family: 'Cinzel', serif; font-size: 16px; color: #aaaadd; font-weight: 700; }
-  .item-price { font-family: 'Cinzel', serif; font-size: 15px; color: #8888cc; white-space: nowrap; }
-  .item-price .original { text-decoration: line-through; color: #44445a; font-size: 12px; margin-right: 5px; }
-  .item-price .spectral { font-size: 10px; color: #6666aa; vertical-align: middle; margin-left: 4px; }
-  .item-meta { font-size: 12px; color: #66668a; margin-bottom: 4px; font-style: italic; }
-  .item-desc { font-size: 14px; line-height: 1.5; color: #9999b8; }
-  .item-flavor { font-size: 12px; color: #555570; font-style: italic; margin-top: 3px; }
-  .magic-tag { font-family: 'Crimson Text', serif; font-size: 10px; background: #2a2a4a; color: #9999dd; padding: 1px 6px; border-radius: 2px; margin-left: 6px; vertical-align: middle; letter-spacing: 1px; text-transform: uppercase; }
-  .stock-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px 24px; margin: 8px 0 12px 0; }
-  .stock-item { display: flex; justify-content: space-between; font-size: 13px; color: #9999b8; padding: 3px 0; border-bottom: 1px dotted #1a1a2a; }
-  .stock-item .stock-price { color: #7070a0; white-space: nowrap; font-family: 'Cinzel', serif; font-size: 12px; }
-  .note { text-align: center; color: #55556a; font-style: italic; font-size: 13px; margin: 12px 0; }
-  .footer { text-align: center; margin-top: 36px; padding-top: 20px; border-top: 1px solid #2a2a3a; color: #33334a; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; line-height: 1.8; }
-  @media print { body { background: #fff; color: #222; } .page { box-shadow: none; border: 1px solid #ccc; background: #fafaff; } .item { background: #f0f0fa; border-left-color: #8888cc; } .item-name { color: #333; } .item-price { color: #555588; } .section-title { color: #555588; } .header h1 { color: #555588; } .item-desc { color: #444; } }
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=IM+Fell+English:ital@0;1&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background: #f4ede3;
+  font-family: 'IM Fell English', Georgia, serif;
+  color: #2c2418;
+  padding: 2rem 1rem 6rem;
+}
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.header {
+  background: #2b231b;
+  border-radius: 32px;
+  padding: 1.5rem 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  border: 1px solid #e0cfb0;
+}
+h1 {
+  font-family: 'Cinzel', serif;
+  font-size: 2rem;
+  color: #f5e2b6;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+}
+.sub {
+  color: #cfbc93;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+.note {
+  background: #3a2e24;
+  padding: 0.7rem 1.2rem;
+  border-radius: 40px;
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: #eedbba;
+}
+.note strong {
+  color: #f3d68a;
+}
+.nav-pills {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 20px 0 16px;
+}
+.nav-pills a {
+  font-family: 'Cinzel', serif;
+  background: #e9dfcf;
+  color: #3b2a1f;
+  padding: 6px 16px;
+  border-radius: 40px;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: all 0.2s;
+  border: 1px solid #d8c5a5;
+}
+.nav-pills a:hover {
+  background: #cdb38c;
+  color: #1f1a12;
+}
+.search-bar {
+  margin: 1rem 0;
+}
+.search-bar input {
+  width: 100%;
+  max-width: 320px;
+  padding: 10px 18px;
+  border-radius: 48px;
+  border: 1px solid #d4be98;
+  background: #fffcf7;
+  font-family: 'IM Fell English', serif;
+  font-size: 0.9rem;
+  outline: none;
+}
+.search-bar input:focus {
+  border-color: #b28b5e;
+  box-shadow: 0 0 0 2px rgba(178,139,94,0.2);
+}
+.section {
+  background: #fffaf2;
+  border-radius: 28px;
+  margin-bottom: 2rem;
+  border: 1px solid #e5d5bc;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+}
+.sec-head {
+  background: #f2ebdf;
+  padding: 1rem 1.8rem;
+  font-family: 'Cinzel', serif;
+  font-size: 1.3rem;
+  color: #3e2c1b;
+  border-bottom: 2px solid #dac29c;
+}
+.sec-desc {
+  padding: 0.8rem 1.8rem 0;
+  color: #7e6a50;
+  font-size: 0.85rem;
+  font-style: italic;
+}
+.table-wrapper {
+  overflow-x: auto;
+  padding: 0 0.5rem 0.8rem;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+th {
+  text-align: left;
+  padding: 12px 10px;
+  background: #f5ede2;
+  color: #5e4430;
+  font-weight: 600;
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+}
+td {
+  padding: 10px 10px;
+  border-bottom: 1px solid #eedfcb;
+  vertical-align: middle;
+}
+.price-col {
+  font-weight: 700;
+  color: #7c5f3a;
+  white-space: nowrap;
+}
+.badge {
+  display: inline-block;
+  background: #e9dccd;
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 30px;
+  margin-left: 8px;
+  color: #7a5a3a;
+}
+.lq-badge {
+  background: #f7e5cf;
+  color: #b86f2c;
+}
+.nq-badge {
+  background: #f0e0d0;
+  color: #a5421a;
+}
+.hover-info {
+  border-bottom: 1px dashed #c0a26b;
+  cursor: help;
+  position: relative;
+}
+.hover-info:hover:after {
+  content: attr(data-desc);
+  position: absolute;
+  left: 0;
+  top: 24px;
+  background: #1f1a14;
+  color: #f7efdf;
+  font-size: 0.75rem;
+  padding: 6px 12px;
+  border-radius: 12px;
+  white-space: nowrap;
+  z-index: 20;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  font-family: 'IM Fell English', serif;
+  pointer-events: none;
+}
+.cart-footnote {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #241f1a;
+  border-top: 2px solid #cdb38c;
+  padding: 12px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  z-index: 1000;
+  font-family: 'IM Fell English', serif;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+  transition: all 0.2s;
+  max-height: 35vh;
+  overflow-y: auto;
+}
+.cart-footnote.collapsed {
+  padding: 8px 20px;
+  max-height: 70px;
+  overflow-y: hidden;
+}
+.cart-summary {
+  background: #3c332a;
+  padding: 6px 16px;
+  border-radius: 40px;
+  color: #f2e2ce;
+  font-size: 0.85rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  flex: 2;
+  overflow-x: auto;
+}
+.cart-total {
+  background: #e2d3be;
+  padding: 6px 18px;
+  border-radius: 40px;
+  font-weight: bold;
+  color: #2f241b;
+  font-family: 'Cinzel', serif;
+  white-space: nowrap;
+}
+.coin-split {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.coin-split button {
+  background: #f0e3d4;
+  border: none;
+  padding: 4px 12px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-family: 'IM Fell English', serif;
+  font-size: 0.75rem;
+  transition: 0.1s;
+}
+.coin-split button.active {
+  background: #c6a86b;
+  color: white;
+}
+.cart-actions button {
+  background: #ba8b4a;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 40px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: 'Cinzel', serif;
+  margin-left: 8px;
+}
+.cart-actions button:hover {
+  background: #9c6e38;
+}
+.minimize-btn {
+  background: #5f4a32;
+  color: #f0e0c0;
+  padding: 4px 12px;
+  border-radius: 40px;
+  font-size: 0.7rem;
+  cursor: pointer;
+  font-family: 'Cinzel', serif;
+}
+@media (max-width: 700px) {
+  .cart-footnote { flex-direction: column; align-items: stretch; padding: 12px; }
+  .cart-summary { max-width: 100%; }
+  .coin-split { justify-content: center; }
+}
 </style>
 </head>
 <body>
-<div class="page">
-
+<div class="container">
   <div class="header">
-    <h1>Grommet General</h1>
-    <div class="tagline">"Serving the community since before we could remember! Which is always."</div>
-    <div class="motto">A Ghost Holdings Inc. Subsidiary &bull; Proudly Serving Grommet Township</div>
-  </div>
-
-  <div class="disclaimer">
-    <strong>NOTICE TO PATRONS:</strong> All items currently exist in a spectral state and are offered at an <strong>8% Spectral Discount</strong> reflecting their present incorporeal condition. Upon purchase, the buyer acknowledges that said items, when made material and manifest, are sold <strong>AS-IS</strong> with no refunds possible. Any quality guarantee printed, stamped, embossed, enchanted, or otherwise indicated on any item is the responsibility of the original manufacturer and <strong>NOT</strong> the responsibility of Ghost Holdings Inc., its subsidiaries, parent entities, or posthumous assignees. Ghost Holdings Inc. makes no representations regarding the continued existence of said manufacturers. By tendering payment the buyer accepts all risk of translocation, degradation, partial manifestation, residual chill, mild haunting, and/or existential ambiguity inherent to spectral commerce. <strong>ALL SALES ARE FINAL. NO EXCEPTIONS. WE MEAN IT. WE'RE DEAD SERIOUS.</strong>
-  </div>
-
-  <!-- WEAPONS & TOOLS -->
-  <div class="section-title">Weapons &amp; Tools</div>
-
-  <div class="item">
-    <div class="item-header">
-      <span class="item-name">Longsword <span class="magic-tag">silvered</span></span>
-      <span class="item-price"><span class="original">115 gp</span> 105 gp <span class="spectral">-8%</span></span>
+    <h1>🧺 The Tradesman's Ledger</h1>
+    <p class="sub">General merchandise · hirelings · interchangeable between towns</p>
+    <div class="note">
+      <strong>📜 Base retail prices.</strong> Renown, infamy, or persuasion may adjust. This menu works for any civilized settlement.
     </div>
-    <div class="item-meta">Weapon, Martial, Silvered</div>
-    <div class="item-desc">A well-made longsword with a silver-plated blade. 1d8 slashing, versatile 1d10. Overcomes resistance to nonmagical, non-silvered weapons.</div>
-    <div class="item-flavor">The silversmith who made this was very proud of it. He's around here somewhere. Don't ask him about it or he'll talk your ear off.</div>
+  </div>
+  <div class="nav-pills">
+    <a href="#general">🧰 General Store</a>
+    <a href="#livestock">🐄 Livestock</a>
+    <a href="#hirelings">⚔️ Hirelings</a>
+    <a href="#apothecary">🧪 Apothecary</a>
+    <a href="#magic">✨ Magic Items</a>
+    <a href="#jobs">📜 Side Quests</a>
+  </div>
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="🔍 Search items by name...">
   </div>
 
-  <div class="item">
-    <div class="item-header">
-      <span class="item-name">Silvering Kit</span>
-      <span class="item-price"><span class="original">100 gp</span> 92 gp <span class="spectral">-8%</span></span>
-    </div>
-    <div class="item-meta">Tool Kit, Rare</div>
-    <div class="item-desc">Contains silver ingots, flux, a small crucible, binding agents, and instructions (in Common) for silvering one weapon or 10 pieces of ammunition. Requires 1 hour of work and access to a heat source. Single use.</div>
-  </div>
-
-  <div class="item">
-    <div class="item-header">
-      <span class="item-name">Hand Crossbow</span>
-      <span class="item-price"><span class="original">75 gp</span> 69 gp <span class="spectral">-8%</span></span>
-    </div>
-    <div class="item-meta">Weapon, Martial, Ranged</div>
-    <div class="item-desc">1d6 piercing, range 30/120, light, loading. Compact, concealable. Comes with a belt holster.</div>
-  </div>
-
-  <div class="item">
-    <div class="item-header">
-      <span class="item-name">Crossbow Bolts (20)</span>
-      <span class="item-price"><span class="original">1 gp</span> 1 gp <span class="spectral">-8%</span></span>
-    </div>
-    <div class="item-meta">Ammunition</div>
-    <div class="item-desc">Standard crossbow bolts in a leather quiver. The quiver has a faded monogram on it that nobody can quite read.</div>
-  </div>
-
-  <div class="item">
-    <div class="item-header">
-      <span class="item-name">Dagger (Pair)</span>
-      <span class="item-price"><span class="original">4 gp</span> 3 gp 7 sp <span class="spectral">-8%</span></span>
-    </div>
-    <div class="item-meta">Weapon, Simple</div>
-    <div class="item-desc">Two plain steel daggers. 1d4 piercing each, finesse, light, thrown (20/60). Sold as a pair because the shopkeeper can't be bothered to split them.</div>
-  </div>
-
-  <!-- ARMOR & PROTECTION -->
-  <div class="section-title">Armor &amp; Protection</div>
-
-  <div class="item">
-    <div class="item-header">
-      <span class="item-name">Chain Shirt</span>
-      <span class="item-price"><span class="original">50 gp</span> 46 gp <span class="spectral">-8%</span></span>
-    </div>
-    <div class="item-meta">Armor, Medium, AC 13 + Dex (max 2)</div>
-    <div class="item-desc">Interlocking metal rings worn beneath a layer of cloth. A little cold to the touch. More than a little cold, actually.</div>
-  </div>
-
-  <div class="item">
-    <div class="item-header">
-      <span class="item-name">Shield, Wooden</span>
-      <span class="item-price"><span class="original">10 gp</span> 9 gp 2 sp <span class="spectral">-8%</span></span>
-    </div>
-    <div class="item-meta">Shield, +2 AC</div>
-    <div class="item-desc">A round wooden shield with an iron boss. Sturdy. Painted with a faded insignia of a town you've never heard of.</div>
-  </div>
-
-  <div class="item">
-    <div class="item-header">
-      <span class="item-name">Leather Armor</span>
-      <span class="item-price"><span class="original">10 gp</span> 9 gp 2 sp <span class="spectral">-8%</span></span>
-    </div>
-    <div class="item-meta">Armor, Light, AC 11 + Dex</div>
-    <div class="item-desc">The breastpiece and shoulder protectors are stiffened boiled leather. Reasonably supple. Smells like it spent time in a closet. A very long time in a closet.</div>
-  </div>
-
-  <!-- MAGICAL CURIOSITIES -->
-  <div class="section-title">Curiosities &amp; Enchantments</div>
-  <div class="note">Items of unusual provenance. Ghost Holdings Inc. does not certify the origin of these goods.</div>
-
-  <div class="item">
-    <div class="item-header">
-      <span class="item-name">Candle of Remembering <span class="magic-tag">magic</span></span>
-      <span class="item-price"><span class="original">80 gp</span> 73 gp 6 sp <span class="spectral">-8%</span></span>
-    </div>
-    <div class="item-meta">Wondrous Item, Uncommon</div>
-    <div class="item-desc">A thick white candle that never melts below the halfway mark. When lit, all creatures within 15 ft gain advantage on Intelligence checks related to recalling information. Burns for 4 hours per use; recharges at dawn. The flame is pale blue and does not produce heat.</div>
-    <div class="item-flavor">The old librarian swears this was in stock before she died. She's probably right.</div>
-  </div>
-
-  <div class="item">
-    <div class="item-header">
-      <span class="item-name">Compass of the Departed <span class="magic-tag">magic</span></span>
-      <span class="item-price"><span class="original">150 gp</span> 138 gp <span class="spectral">-8%</span></span>
-    </div>
-    <div class="item-meta">Wondrous Item, Uncommon, Requires Attunement</div>
-    <div class="item-desc">A brass compass whose needle does not point north. Instead, it points toward the nearest undead creature within 120 ft. If no undead are in range, the needle spins slowly. If the bearer is in a location with more than 10 undead within range, the needle vibrates and emits a faint hum.</div>
-    <div class="item-flavor">Might have been more useful to the original owner.</div>
-  </div>
-
-  <div class="item">
-    <div class="item-header">
-      <span class="item-name">Cloak of Pockets <span class="magic-tag">magic</span></span>
-      <span class="item-price"><span class="original">200 gp</span> 184 gp <span class="spectral">-8%</span></span>
-    </div>
-    <div class="item-meta">Wondrous Item, Uncommon</div>
-    <div class="item-desc">A heavy grey traveling cloak lined with what appears to be seven interior pockets. In fact, it has fourteen. Seven are visible; seven are accessible only when you reach for something specific you've already stored in the cloak. Each pocket holds up to 10 lbs without adding to the cloak's weight. Items stored in hidden pockets cannot be found by pat-down searches (DC 20 Investigation to detect).</div>
-    <div class="item-flavor">A traveling merchant's cloak. The merchant is still traveling, technically.</div>
-  </div>
-
-  <div class="item">
-    <div class="item-header">
-      <span class="item-name">Everwick Lantern <span class="magic-tag">magic</span></span>
-      <span class="item-price"><span class="original">60 gp</span> 55 gp 2 sp <span class="spectral">-8%</span></span>
-    </div>
-    <div class="item-meta">Wondrous Item, Common</div>
-    <div class="item-desc">A hooded lantern that does not require oil. Produces bright light in a 30 ft radius, dim light for an additional 30 ft. Can be shuttered as an action. The light has a faintly greenish tint. It flickers when someone nearby is lying, though this is not reliable enough to use as a polygraph.</div>
-  </div>
-
-  <div class="item">
-    <div class="item-header">
-      <span class="item-name">Whittler's Knife <span class="magic-tag">magic</span></span>
-      <span class="item-price"><span class="original">35 gp</span> 32 gp 2 sp <span class="spectral">-8%</span></span>
-    </div>
-    <div class="item-meta">Wondrous Item, Common</div>
-    <div class="item-desc">A small folding knife. Anything carved from wood with this knife is unnaturally detailed and lifelike. Figurines appear to breathe. Carved faces are recognizable from across a room. Purely aesthetic; no mechanical benefit, but carved goods sell for triple the normal artisan price.</div>
-    <div class="item-flavor">The old man in the rocking chair by the general store made this. He's still there, rocking. He doesn't know he's dead. Please don't tell him.</div>
-  </div>
-
-  <!-- ADVENTURING SUPPLIES -->
-  <div class="section-title">Adventuring Supplies</div>
-  <div class="note">Mundane goods for the discerning subterranean traveler. All prices reflect the 8% spectral discount.</div>
-
-  <div class="stock-grid">
-    <div class="stock-item"><span>Hempen Rope (50 ft)</span><span class="stock-price">92 cp</span></div>
-    <div class="stock-item"><span>Silk Rope (50 ft)</span><span class="stock-price">9 gp 2 sp</span></div>
-    <div class="stock-item"><span>Pitons (10)</span><span class="stock-price">92 cp</span></div>
-    <div class="stock-item"><span>Grappling Hook</span><span class="stock-price">1 gp 8 sp</span></div>
-    <div class="stock-item"><span>Torch (bundle of 6)</span><span class="stock-price">55 cp</span></div>
-    <div class="stock-item"><span>Lantern, Hooded</span><span class="stock-price">4 gp 6 sp</span></div>
-    <div class="stock-item"><span>Oil Flask (3)</span><span class="stock-price">28 cp</span></div>
-    <div class="stock-item"><span>Tinderbox</span><span class="stock-price">46 cp</span></div>
-    <div class="stock-item"><span>Healer's Kit (10 uses)</span><span class="stock-price">4 gp 6 sp</span></div>
-    <div class="stock-item"><span>Caltrops (bag of 20)</span><span class="stock-price">92 cp</span></div>
-    <div class="stock-item"><span>Ball Bearings (bag of 1000)</span><span class="stock-price">92 cp</span></div>
-    <div class="stock-item"><span>Chain (10 ft)</span><span class="stock-price">4 gp 6 sp</span></div>
-    <div class="stock-item"><span>Crowbar</span><span class="stock-price">1 gp 8 sp</span></div>
-    <div class="stock-item"><span>Hammer &amp; Iron Spikes (10)</span><span class="stock-price">1 gp 84 cp</span></div>
-    <div class="stock-item"><span>Manacles</span><span class="stock-price">1 gp 8 sp</span></div>
-    <div class="stock-item"><span>Blanket, Wool</span><span class="stock-price">46 cp</span></div>
-    <div class="stock-item"><span>Bedroll</span><span class="stock-price">92 cp</span></div>
-    <div class="stock-item"><span>Waterskin (empty)</span><span class="stock-price">18 cp</span></div>
-    <div class="stock-item"><span>Backpack</span><span class="stock-price">1 gp 8 sp</span></div>
-    <div class="stock-item"><span>Belt Pouch</span><span class="stock-price">46 cp</span></div>
-    <div class="stock-item"><span>Chalk (10 pieces)</span><span class="stock-price">9 cp</span></div>
-    <div class="stock-item"><span>Ink Bottle</span><span class="stock-price">9 gp 2 sp</span></div>
-    <div class="stock-item"><span>Parchment (5 sheets)</span><span class="stock-price">92 cp</span></div>
-    <div class="stock-item"><span>Mirror, Steel</span><span class="stock-price">4 gp 6 sp</span></div>
-    <div class="stock-item"><span>Mess Kit</span><span class="stock-price">18 cp</span></div>
-    <div class="stock-item"><span>Sealing Wax</span><span class="stock-price">46 cp</span></div>
-  </div>
-
-  <div class="note">Note: Grommet General does not stock perishable goods. We apologize for the inconvenience. The bakery is... not operational at this time.</div>
-
-  <div class="footer">
-    All sales are final &bull; No refunds &bull; No exchanges &bull; No exceptions<br>
-    Ghost Holdings Inc. &bull; Grommet Township Branch<br>
-    "We were here before you, and we'll be here after."<br><br>
-    <span style="font-size:8px; color:#22223a">Ghost Holdings Inc. is a registered posthumous commercial entity operating under the Ethereal Commerce Act of the Third Age. Any resemblance to living businesses, operating or defunct, is entirely coincidental and probably your imagination. Ghost Holdings Inc. is not liable for emotional distress caused by the realization that you are purchasing goods from the dead. Please shop responsibly.</span>
-  </div>
-
+  <div id="catalogue"></div>
 </div>
+
+<div class="cart-footnote" id="cartFoot">
+  <div class="cart-summary" id="cartSummary">🛒 Cart empty</div>
+  <div class="cart-total" id="cartTotal">0 gp</div>
+  <div class="coin-split" id="coinSplitGroup">
+    <span style="color:#e6d8c4;">Split as:</span>
+    <button data-preference="gold" class="active">Gold first</button>
+    <button data-preference="silver">Silver first</button>
+    <button data-preference="copper">Copper first</button>
+    <button data-preference="balanced">Balanced</button>
+  </div>
+  <div class="cart-actions">
+    <button id="copyReceiptBtn">📋 Copy Receipt</button>
+    <button id="clearCartBtn">Clear Cart</button>
+    <button id="minimizeCartBtn" class="minimize-btn">▼ Minimize</button>
+  </div>
+</div>
+
+<script>
+// --------------------------------------------------------------
+// DATA
+// --------------------------------------------------------------
+const weapons = [
+  {name:"Club", price:0.1, desc:"A stout wooden club."},
+  {name:"Dagger", price:2, desc:"Small blade, easily concealed."},
+  {name:"Handaxe", price:5, desc:"Balanced for throwing."},
+  {name:"Javelin", price:0.5, desc:"Throwing spear."},
+  {name:"Light Crossbow", price:25, desc:"Simple ranged."},
+  {name:"Shortbow", price:25, desc:"Simple bow."},
+  {name:"Longsword", price:15, desc:"Versatile martial sword."},
+  {name:"Rapier", price:25, desc:"Finesse, 1d8 piercing."},
+  {name:"Greatsword", price:50, desc:"Two-handed 2d6."},
+  {name:"Arrows (20)", price:1, desc:"Ammunition."},
+  {name:"Crossbow Bolts (20)", price:1, desc:"Ammunition."}
+];
+const armors = [
+  {name:"Leather Armor", price:10, desc:"AC 11 + Dex", avail:""},
+  {name:"Studded Leather", price:45, desc:"AC 12 + Dex", avail:""},
+  {name:"Chain Shirt", price:50, desc:"Medium AC 13 + Dex (max 2)", avail:"NQ"},
+  {name:"Breastplate", price:400, desc:"Medium AC 14 + Dex (max 2)", avail:"NQ"},
+  {name:"Half Plate", price:750, desc:"Medium AC 15 + Dex (max 2)", avail:"NQ"},
+  {name:"Chain Mail", price:75, desc:"Heavy AC 16, stealth disadvantage", avail:""},
+  {name:"Shield", price:10, desc:"+2 AC"}
+];
+const gear = [
+  {name:"Backpack", price:2, desc:"Holds 30 lbs."},
+  {name:"Bedroll", price:1, desc:"Sleeping roll"},
+  {name:"Rations (1 day)", price:0.5, desc:"Dried meat, biscuit"},
+  {name:"Waterskin", price:0.2, desc:"Holds 4 pints"},
+  {name:"Hempen Rope (50ft)", price:1, desc:"Supports 400 lbs"},
+  {name:"Silk Rope (50ft)", price:10, desc:"Lightweight, 500 lbs", avail:"NQ"},
+  {name:"Grappling Hook", price:2, desc:"Anchor for climbing"},
+  {name:"Healer's Kit", price:5, desc:"10 uses to stabilize", exotic:true, descFull:"Bandages, salves, splints. Action to stabilize."},
+  {name:"Forgery Kit", price:15, desc:"Papers, inks, seals", exotic:true, descFull:"Allows checks to forge documents."},
+  {name:"Disguise Kit", price:25, desc:"Cosmetics, props", exotic:true, descFull:"Advantage on disguise checks."},
+  {name:"Thieves' Tools", price:25, desc:"Lockpicks, files", avail:"LQ", exotic:true, descFull:"Required to pick locks and disarm traps."},
+  {name:"Poisoner's Kit", price:50, desc:"Vials, toxins", avail:"NQ", exotic:true, descFull:"Crafting and applying poisons."}
+];
+const livestock = [
+  {name:"Cow (milk cow)", price:20, desc:"1 gallon milk/day"},
+  {name:"Ox (draft)", price:30, desc:"Heavy pulling"},
+  {name:"Pig", price:10, desc:"Fatten for slaughter / truffles"},
+  {name:"Sheep", price:8, desc:"Wool once per season"},
+  {name:"Goat", price:6, desc:"Milk, brush clearing"},
+  {name:"Chicken (dozen)", price:2, desc:"Egg layers"},
+  {name:"Riding Horse", price:75, desc:"Standard mount"},
+  {name:"Draft Horse", price:50, desc:"Work horse"},
+  {name:"Warhorse", price:400, desc:"Combat-trained", avail:"NQ"},
+  {name:"Pony", price:30, desc:"Small mount"},
+  {name:"Donkey", price:8, desc:"Pack animal"},
+  {name:"Saddle (Riding)", price:10, desc:"Standard saddle"},
+  {name:"Saddle (Military)", price:20, desc:"Combat saddle"},
+  {name:"Cart", price:15, desc:"Two-wheeled"},
+  {name:"Wagon", price:35, desc:"Covered wagon"},
+  {name:"Stabling (per day)", price:0.5, desc:"Per animal"}
+];
+const hirelings = [
+  {name:"Unskilled Laborer", price:0.2, desc:"per day, no special skills", unit:"day"},
+  {name:"Skilled Artisan", price:2, desc:"per day, blacksmith, carpenter, etc.", unit:"day"},
+  {name:"Mercenary (light foot)", price:1, desc:"per day, leather armor, simple weapons", unit:"day"},
+  {name:"Mercenary (heavy foot)", price:2, desc:"per day, chain, shield, martial weapons", unit:"day"},
+  {name:"Archer", price:2, desc:"per day, longbow, leather", unit:"day"},
+  {name:"Bodyguard (veteran)", price:4, desc:"per day, plate, shield, skilled", unit:"day"},
+  {name:"Scribe / Scholar", price:1.5, desc:"per day, reading/writing, research", unit:"day"},
+  {name:"Healer (adept)", price:3, desc:"per day, can use healer's kit, treat wounds", unit:"day"}
+];
+const apothecary = [
+  {name:"Potion of Healing (2d4+2)", price:50, avail:"LQ", exotic:true, descFull:"Standard healing draught."},
+  {name:"Potion of Greater Healing", price:150, avail:"LQ", exotic:true},
+  {name:"Potion of Superior Healing", price:450, avail:"NQ", exotic:true},
+  {name:"Antitoxin", price:50, avail:"LQ", exotic:true, desc:"Advantage on poison saves 1h"},
+  {name:"Elixir of Health", price:120, avail:"NQ", exotic:true},
+  {name:"Potion of Climbing", price:180, avail:"NQ", exotic:true},
+  {name:"Potion of Water Breathing", price:180, avail:"NQ", exotic:true},
+  {name:"Basic Poison (vial)", price:100, avail:"LQ", exotic:true},
+  {name:"Alchemist's Fire", price:50, exotic:true},
+  {name:"Holy Water", price:25, avail:"LQ", exotic:true}
+];
+const homebrewOils = [
+  {name:"Burning Oil", price:75, exotic:true, descFull:"1d4 fire/round, ignites surfaces"},
+  {name:"Frost Oil", price:75, exotic:true, desc:"1d4 cold, reduces speed"},
+  {name:"Silver Oil", price:20, exotic:true, desc:"Weapon counts as silvered 1h"},
+  {name:"Flametongue Oil", price:195, exotic:true, descFull:"+1d6 fire damage 1 min"}
+];
+const spellServices = [
+  {name:"Detect Magic (ritual)", price:10, desc:"Reveals magic 30ft"},
+  {name:"Identify", price:20, avail:"LQ"},
+  {name:"Lesser Restoration", price:40},
+  {name:"Remove Curse", price:90, avail:"LQ"},
+  {name:"Revivify (component incl)", price:300, avail:"NQ", desc:"Return creature to life"},
+  {name:"Speak with Dead", price:90, avail:"NQ"}
+];
+const magicItems = [
+  {name:"Potion of Healing", rarity:"Common", price:50, avail:"LQ", attunement:false, desc:"Healing 2d4+2"},
+  {name:"Spell Scroll (Cantrip)", rarity:"Common", price:50, attunement:false, desc:"One-use cantrip"},
+  {name:"Spell Scroll (1st Level)", rarity:"Common", price:100, attunement:false},
+  {name:"Wand of Magic Detection", rarity:"Uncommon", price:300, avail:"LQ", attunement:false, desc:"3 charges, detect magic"},
+  {name:"Bag of Holding", rarity:"Uncommon", price:400, avail:"NQ", attunement:false, desc:"500 lbs / 64 cu ft"},
+  {name:"Cloak of Billowing", rarity:"Common", price:60, attunement:false, desc:"Bonus action to billow"},
+  {name:"Moon-Touched Sword", rarity:"Common", price:75, avail:"LQ", attunement:false, desc:"Sheds moonlight"},
+  {name:"Gloves of Thievery", rarity:"Uncommon", price:300, attunement:true, desc:"+5 Sleight of Hand & lockpicking"},
+  {name:"Cap of Water Breathing", rarity:"Uncommon", price:250, attunement:false, desc:"Breathe underwater"}
+];
+const jokeItems = [
+  {name:"Squash-Sword (cushion blade)", price:12, avail:"LQ", exotic:true, desc:"1d4 bludgeoning, nonlethal. On crit: explodes"},
+  {name:"Dehydrated Cucumber Fettuccine Soup Cubes", price:3, exotic:true, desc:"0 nourishment. Tastes like regret."}
+];
+
+const generalStore = [...weapons, ...armors, ...gear, ...jokeItems];
+const categories = [
+  { id:"general", title:"🧰 General Store", items: generalStore },
+  { id:"livestock", title:"🐄 Livestock & Steeds", items: livestock },
+  { id:"hirelings", title:"⚔️ Hirelings & Labor (per day)", items: hirelings },
+  { id:"apothecary", title:"🧪 Apothecary & Potions", items: apothecary },
+  { id:"oils", title:"🔮 Homebrew Oils", items: homebrewOils },
+  { id:"services", title:"✨ Spellcasting Services", items: spellServices },
+  { id:"magic", title:"⭐ Magic Items (9 items)", items: magicItems }
+];
+
+// ---------- CART ----------
+let cartMap = new Map();
+function addToCart(name, price) {
+  if (cartMap.has(name)) {
+    let entry = cartMap.get(name);
+    entry.quantity += 1;
+    cartMap.set(name, entry);
+  } else {
+    cartMap.set(name, { price, quantity: 1 });
+  }
+  updateCartUI();
+}
+function removeOneFromCart(name) {
+  if (cartMap.has(name)) {
+    let entry = cartMap.get(name);
+    if (entry.quantity > 1) entry.quantity -= 1;
+    else cartMap.delete(name);
+  }
+  updateCartUI();
+}
+function clearCart() { cartMap.clear(); updateCartUI(); }
+function getTotalGold() {
+  let total = 0;
+  for (let e of cartMap.values()) total += e.price * e.quantity;
+  return total;
+}
+function formatCoin(total, pref) {
+  if (total === 0) return "0 gp";
+  let cp = Math.round(total * 100);
+  let gp = Math.floor(cp / 100);
+  let sp = Math.floor((cp % 100) / 10);
+  let c = cp % 10;
+  let parts = [];
+  if (pref === "gold") {
+    if (gp) parts.push(`${gp} gp`);
+    if (sp) parts.push(`${sp} sp`);
+    if (c) parts.push(`${c} cp`);
+  } else if (pref === "silver") {
+    let totalSilver = gp*10 + sp + c/10;
+    let sv = Math.floor(totalSilver);
+    let rem = Math.round((totalSilver - sv)*10);
+    if (sv) parts.push(`${sv} sp`);
+    if (rem) parts.push(`${rem} cp`);
+  } else if (pref === "copper") {
+    parts.push(`${Math.round(total*100)} cp`);
+  } else {
+    if (gp) parts.push(`${gp} gp`);
+    if (sp) parts.push(`${sp} sp`);
+    if (c) parts.push(`${c} cp`);
+  }
+  return parts.join(" · ");
+}
+let coinPref = "gold";
+function updateCartUI() {
+  const total = getTotalGold();
+  document.getElementById("cartTotal").innerText = formatCoin(total, coinPref);
+  const cartDiv = document.getElementById("cartSummary");
+  if (cartMap.size === 0) {
+    cartDiv.innerHTML = "🛒 Cart empty";
+  } else {
+    let html = "";
+    for (let [name, entry] of cartMap.entries()) {
+      html += `<span style="background:#3e3228; padding:4px 12px; border-radius:30px; display:inline-flex; gap:6px; align-items:center; margin:2px;">
+        ${entry.quantity}× ${name} (${(entry.price * entry.quantity).toFixed(2)} gp)
+        <button class="remove-one" data-name="${name.replace(/"/g, '&quot;')}" style="background:none; border:none; color:#dba959; cursor:pointer;">−</button>
+      </span>`;
+    }
+    cartDiv.innerHTML = html;
+    document.querySelectorAll('.remove-one').forEach(btn => {
+      btn.addEventListener('click', () => removeOneFromCart(btn.getAttribute('data-name')));
+    });
+  }
+  document.querySelectorAll('[data-preference]').forEach(btn => {
+    if (btn.dataset.preference === coinPref) btn.classList.add('active');
+    else btn.classList.remove('active');
+  });
+}
+function copyReceipt() {
+  if (cartMap.size === 0) { alert("Cart empty."); return; }
+  let receipt = "🧾 TRADESMAN'S LEDGER RECEIPT\n--------------------------------\n";
+  for (let [name, entry] of cartMap.entries()) {
+    receipt += `${entry.quantity} × ${name} — ${(entry.price * entry.quantity).toFixed(2)} gp\n`;
+  }
+  receipt += "--------------------------------\n";
+  receipt += `TOTAL: ${formatCoin(getTotalGold(), coinPref)}\nSplit: ${coinPref} first\nThank you!`;
+  navigator.clipboard.writeText(receipt).then(() => alert("Receipt copied!")).catch(() => alert("Failed."));
+}
+let collapsed = false;
+function toggleCart() {
+  const foot = document.getElementById('cartFoot');
+  const btn = document.getElementById('minimizeCartBtn');
+  if (collapsed) {
+    foot.classList.remove('collapsed');
+    btn.innerHTML = "▼ Minimize";
+  } else {
+    foot.classList.add('collapsed');
+    btn.innerHTML = "▲ Expand";
+  }
+  collapsed = !collapsed;
+}
+
+// ---------- RENDER ----------
+function renderCatalog(search = "") {
+  const container = document.getElementById('catalogue');
+  let html = "";
+  for (let cat of categories) {
+    let filtered = cat.items.filter(i => i.name.toLowerCase().includes(search.toLowerCase()));
+    if (!filtered.length) continue;
+    html += `<div class="section" id="${cat.id}"><div class="sec-head">${cat.title}</div><div class="sec-desc">${cat.id==='magic'?'Attunement notes where applicable.':cat.id==='hirelings'?'Daily rates, no long-term commitment.':'Standard wares.'}</div><div class="table-wrapper"><table><thead><tr><th>Item</th><th>Price</th><th>Details</th><th></th></tr></thead><tbody>`;
+    for (let item of filtered) {
+      let availHtml = "";
+      if (item.avail === "LQ") availHtml = `<span class="badge lq-badge">LQ</span>`;
+      else if (item.avail === "NQ") availHtml = `<span class="badge nq-badge">NQ</span>`;
+      let detail = "";
+      if (item.attunement !== undefined) detail += (item.attunement ? "Attunement ✓ " : "No attunement ");
+      if (item.desc) detail += item.desc;
+      else if (item.descFull) detail += item.descFull;
+      else if (item.unit) detail += `${item.unit} rate`;
+      let showTooltip = item.exotic || item.name.includes("Kit") || item.name.includes("Potion") || item.name.includes("Oil") || item.name.includes("Scroll") || item.name.includes("Wand") || item.name.includes("Bag") || item.name.includes("Gloves") || item.name.includes("Cap") || item.name.includes("Squash");
+      let displayName = item.name;
+      if (showTooltip && (item.descFull || item.desc)) {
+        let tip = (item.descFull || item.desc || detail).replace(/"/g, '&quot;');
+        displayName = `<span class="hover-info" data-desc="${tip}">${item.name}</span>`;
+      }
+      html += `<tr>
+        <td>${displayName}${availHtml}</td>
+        <td class="price-col">${item.price.toFixed(2)} gp</td>
+        <td class="nc">${detail}</td>
+        <td><button class="add-to-cart" data-name="${item.name.replace(/"/g, '&quot;')}" data-price="${item.price}" style="background:#e7d9c8; border:none; border-radius:30px; width:32px; height:32px; font-size:1.2rem; cursor:pointer;">+</button></td>
+      <tr>`;
+    }
+    html += `</tbody></table></div></div>`;
+  }
+  container.innerHTML = html;
+  document.querySelectorAll('.add-to-cart').forEach(btn => {
+    btn.addEventListener('click', () => {
+      addToCart(btn.getAttribute('data-name'), parseFloat(btn.getAttribute('data-price')));
+    });
+  });
+}
+
+function renderSideQuests() {
+  const quests = [
+    { face:"⚀ 1", title:"Temple / Officiate", desc:"Official tasks – escort pilgrims, cleanse shrines. Pay: Renown + gold." },
+    { face:"⚁ 2", title:"Merchant Guild", desc:"Caravan protection, debt collection. Solid coin & influence." },
+    { face:"⚂ 3", title:"Under‑the‑Table Broker", desc:"Retrieval, spying. High pay, neutral rep." },
+    { face:"⚃ 4", title:"Criminal Syndicate", desc:"Heists, smuggling. Lucrative but illegal; risk infamy." }
+  ];
+  let qHtml = `<div class="section" id="jobs"><div class="sec-head">📜 Side Quest Outlines (d4)</div><div class="sec-desc">Roll a d4 or ask your DM — each represents a category of work in most towns.</div><div style="display:flex; flex-wrap:wrap; gap:1rem; padding:1rem;">`;
+  for (let q of quests) {
+    qHtml += `<div style="background:#f9f2e6; border-radius:24px; padding:1rem; flex:1; min-width:180px; border-left:6px solid #b8864b;"><div style="font-size:1.8rem;">${q.face}</div><div style="font-weight:bold;">${q.title}</div><div style="font-size:0.8rem; color:#5e4a34;">${q.desc}</div></div>`;
+  }
+  qHtml += `</div></div>`;
+  document.getElementById('catalogue').insertAdjacentHTML('beforeend', qHtml);
+}
+
+// event binding
+document.getElementById('searchInput').addEventListener('input', (e) => renderCatalog(e.target.value));
+document.querySelectorAll('[data-preference]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    coinPref = btn.dataset.preference;
+    updateCartUI();
+  });
+});
+document.getElementById('clearCartBtn').addEventListener('click', clearCart);
+document.getElementById('copyReceiptBtn').addEventListener('click', copyReceipt);
+document.getElementById('minimizeCartBtn').addEventListener('click', toggleCart);
+
+renderCatalog("");
+renderSideQuests();
+updateCartUI();
+</script>
 </body>
 </html>
