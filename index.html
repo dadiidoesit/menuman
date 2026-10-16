@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>The Tradesman's Ledger — Shop & Hire</title>
-<style>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Tradesman's Ledger — Shop & Hire</title><style>
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=IM+Fell+English:ital@0;1&display=swap');
 * {
   margin: 0;
@@ -301,361 +295,89 @@ td {
   .cart-summary { max-width: 100%; }
   .coin-split { justify-content: center; }
 }
-</style>
-</head>
-<body>
-<div class="container">
-  <div class="header">
-    <h1>🧺 The Tradesman's Ledger</h1>
-    <p class="sub">General merchandise · hirelings · interchangeable between towns</p>
-    <div class="note">
-      <strong>📜 Base retail prices.</strong> Renown, infamy, or persuasion may adjust. This menu works for any civilized settlement.
-    </div>
-  </div>
-  <div class="nav-pills">
-    <a href="#general">🧰 General Store</a>
-    <a href="#livestock">🐄 Livestock</a>
-    <a href="#hirelings">⚔️ Hirelings</a>
-    <a href="#apothecary">🧪 Apothecary</a>
-    <a href="#magic">✨ Magic Items</a>
-    <a href="#jobs">📜 Side Quests</a>
-  </div>
-  <div class="search-bar">
-    <input type="text" id="searchInput" placeholder="🔍 Search items by name...">
-  </div>
 
-  <div id="catalogue"></div>
-</div>
-
-<!-- Floating toggle button (middle right) -->
-<button id="cartToggleBtn" class="cart-toggle-btn">🛒</button>
-
-<!-- Cart panel -->
-<div id="cartPanel" class="cart-panel">
-  <div class="cart-summary" id="cartSummary">🛒 Cart empty</div>
-  <div class="cart-total" id="cartTotal">0 gp</div>
-  <div class="coin-split" id="coinSplitGroup">
-    <span style="color:#e6d8c4;">Split as:</span>
-    <button data-preference="gold" class="active">Gold first</button>
-    <button data-preference="silver">Silver first</button>
-    <button data-preference="copper">Copper first</button>
-    <button data-preference="balanced">Balanced</button>
-  </div>
-  <div class="cart-actions">
-    <button id="copyReceiptBtn">📋 Copy Receipt</button>
-    <button id="clearCartBtn">Clear Cart</button>
-  </div>
-</div>
-
+.controls{display:flex;flex-wrap:wrap;align-items:end;gap:1rem;background:#fffaf2;border:1px solid #e5d5bc;border-radius:22px;padding:1.1rem 1.4rem;margin:1rem 0 1.5rem;box-shadow:0 3px 10px #00000008}
+.control{display:flex;flex-direction:column;gap:.35rem;min-width:170px;flex:1}.control label{font:600 .75rem Cinzel,serif;color:#65482c}
+.control input,.control select{padding:.7rem;border-radius:12px;border:1px solid #d4be98;background:#fffcf7;color:#2c2418;font:1rem 'IM Fell English',Georgia,serif;width:100%}
+.pill-row{display:flex;gap:.35rem;flex-wrap:wrap}.pill-row button,.small-btn{padding:.5rem .8rem;border:1px solid #cdb38c;background:#f2e8d7;border-radius:12px;cursor:pointer;font-family:'IM Fell English',Georgia,serif;color:#3b2a1f}.pill-row button.active{background:#60442d;color:#fff4dd}
+small,.muted{color:#846b50}.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:.5rem 0 1.2rem}.chip{background:#eadcc9;border-radius:30px;padding:5px 12px;color:#674c32;font-size:.8rem}
+.section{scroll-margin-top:15px}.section .sec-head{display:flex;justify-content:space-between;align-items:center;gap:10px}.sec-count{font:normal .72rem Cinzel,serif;color:#846b50}
+tr:hover td{background:#fdf0de}.item-desc{font-size:.8rem;color:#826a50}.item-origin{font-size:.67rem;color:#846b50;display:block}.add-to-cart{background:#e3d1b8;border:0;border-radius:30px;padding:5px 12px;cursor:pointer;font-size:1.2rem;color:#2e2117}
+.cart-panel{max-height:55vh}.cart-summary{max-height:26vh;overflow:auto}.cart-line{background:#3e3228;padding:5px 9px;border-radius:12px;display:inline-flex;gap:7px;align-items:center;margin:2px}.cart-line button{border:0;background:#6a5139;color:#fff1da;border-radius:8px;cursor:pointer;padding:2px 7px}
+.cart-actions{display:flex;gap:.4rem;flex-wrap:wrap}.cart-actions button{margin-left:0}.cart-toggle-btn{font-size:1.25rem}.cart-toggle-btn span{font:600 .7rem Arial,sans-serif;position:absolute;top:-5px;right:-5px;border-radius:20px;background:#473426;color:white;padding:3px 6px}
+.notice{background:#efe3d1;border-left:4px solid #b78a48;padding:.8rem 1rem;border-radius:10px;font-size:.85rem;margin:.8rem 0}.empty{padding:1.5rem;text-align:center;color:#836b4f}
+@media(max-width:700px){body{padding:1rem .5rem 110px}.header{padding:1.25rem}.header h1{font-size:1.5rem}.controls{padding:.8rem}.cart-toggle-btn{top:auto;bottom:14px;right:14px;transform:none}.cart-toggle-btn:hover{transform:none}.cart-panel{padding:10px;max-height:58vh}.section .sec-head{font-size:1rem;padding:.9rem}.table-wrapper{padding:0}.table-wrapper td,.table-wrapper th{padding:8px 6px}.item-desc{max-width:180px}}
+</style></head><body><main class="container">
+<header class="header"><h1>🧺 The Tradesman's Ledger</h1><p class="sub">Equipment · provisions · healing · magic · hirelings</p><div class="note"><strong>📜 DM-facing shop catalogue.</strong> PHB equipment list prices are the starting point; local pricing and magic-item retail costs are configurable house rules.</div></header>
+<div class="controls"><div class="control"><label for="searchInput">Find merchandise</label><input id="searchInput" type="search" placeholder="Search weapons, armor, potions…" autocomplete="off"></div><div class="control"><label>Settlement</label><div class="pill-row" id="markets"><button data-market="rural" type="button">Rural</button><button data-market="standard" class="active" type="button">Standard</button><button data-market="city" type="button">City</button></div></div><div class="control"><label for="categoryFilter">Department</label><select id="categoryFilter"><option value="all">All departments</option></select></div><div class="control"><label for="sourceFilter">Item type</label><select id="sourceFilter"><option value="all">All items</option><option value="official">Standard 5e equipment & items</option><option value="priced">DM-priced magic & services</option><option value="homebrew">Homebrew only</option></select></div></div>
+<div class="controls"><div class="control"><label for="ruralFactor">Rural multiplier</label><input id="ruralFactor" type="number" value="1.25" min="0.1" max="10" step="0.05"></div><div class="control"><label for="cityFactor">City multiplier</label><input id="cityFactor" type="number" value="0.9" min="0.1" max="10" step="0.05"></div><div class="control"><label for="adjustMagic"><span>Adjust magic item prices too</span></label><select id="adjustMagic"><option value="yes">Yes — apply local multiplier</option><option value="no">No — fixed retail prices</option></select></div><div class="control"><label for="showQuests">Side-quest prompts</label><select id="showQuests"><option value="yes">Show</option><option value="no">Hide</option></select></div></div>
+<div class="chips"><span class="chip" id="marketLabel">Standard prices · ×1.00</span><span class="chip" id="resultCount">Loading…</span><span class="chip">1 gp = 10 sp = 100 cp</span></div><nav class="nav-pills" id="navPills"></nav><div id="catalogue"></div><section class="section" id="jobs"><div class="sec-head">📜 Side Quest Outlines (d4)</div><div class="sec-desc">Roll a d4 for local employment.</div><div style="display:flex;flex-wrap:wrap;gap:1rem;padding:1rem" id="questCards"></div></section>
+<div class="notice"><strong>About prices:</strong> Mundane equipment uses the 2014 fifth-edition Player's Handbook baseline wherever published. Extra livestock, paid services, spellcasting and magic-item shop prices are DM estimates, labeled accordingly. Healing potion upgrades use the requested house prices, including Supreme at 1,350 gp. Availability is always the DM's decision.</div></main>
+<button class="cart-toggle-btn" id="cartToggleBtn" aria-label="Open shopping cart" aria-expanded="false">🛒 <span id="cartCount">0</span></button>
+<aside id="cartPanel" class="cart-panel hidden" aria-label="Shopping cart"><div class="cart-summary" id="cartSummary">Cart empty</div><div class="cart-total" id="cartTotal">0 gp</div><div class="coin-split" id="coinSplitGroup"><span style="color:#e6d8c4">Display:</span><button class="active" data-preference="gold">Gold</button><button data-preference="silver">Silver</button><button data-preference="copper">Copper</button></div><div class="cart-actions"><button id="copyReceiptBtn">📋 Receipt</button><button id="clearCartBtn">Clear</button><button id="closeCartBtn">Close</button></div></aside>
 <script>
-// --------------------------------------------------------------
-// DATA
-// --------------------------------------------------------------
-const weapons = [
-  {name:"Club", price:0.1, desc:"A stout wooden club."},
-  {name:"Dagger", price:2, desc:"Small blade, easily concealed."},
-  {name:"Handaxe", price:5, desc:"Balanced for throwing."},
-  {name:"Javelin", price:0.5, desc:"Throwing spear."},
-  {name:"Light Crossbow", price:25, desc:"Simple ranged."},
-  {name:"Shortbow", price:25, desc:"Simple bow."},
-  {name:"Longsword", price:15, desc:"Versatile martial sword."},
-  {name:"Rapier", price:25, desc:"Finesse, 1d8 piercing."},
-  {name:"Greatsword", price:50, desc:"Two-handed 2d6."},
-  {name:"Arrows (20)", price:1, desc:"Ammunition."},
-  {name:"Crossbow Bolts (20)", price:1, desc:"Ammunition."}
-];
-const armors = [
-  {name:"Leather Armor", price:10, desc:"AC 11 + Dex", avail:""},
-  {name:"Studded Leather", price:45, desc:"AC 12 + Dex", avail:""},
-  {name:"Chain Shirt", price:50, desc:"Medium AC 13 + Dex (max 2)", avail:"NQ"},
-  {name:"Breastplate", price:400, desc:"Medium AC 14 + Dex (max 2)", avail:"NQ"},
-  {name:"Half Plate", price:750, desc:"Medium AC 15 + Dex (max 2)", avail:"NQ"},
-  {name:"Chain Mail", price:75, desc:"Heavy AC 16, stealth disadvantage", avail:""},
-  {name:"Shield", price:10, desc:"+2 AC"}
-];
-const gear = [
-  {name:"Backpack", price:2, desc:"Holds 30 lbs."},
-  {name:"Bedroll", price:1, desc:"Sleeping roll"},
-  {name:"Rations (1 day)", price:0.5, desc:"Dried meat, biscuit"},
-  {name:"Waterskin", price:0.2, desc:"Holds 4 pints"},
-  {name:"Hempen Rope (50ft)", price:1, desc:"Supports 400 lbs"},
-  {name:"Silk Rope (50ft)", price:10, desc:"Lightweight, 500 lbs", avail:"NQ"},
-  {name:"Grappling Hook", price:2, desc:"Anchor for climbing"},
-  {name:"Healer's Kit", price:5, desc:"10 uses to stabilize", exotic:true, descFull:"Bandages, salves, splints. Action to stabilize."},
-  {name:"Forgery Kit", price:15, desc:"Papers, inks, seals", exotic:true, descFull:"Allows checks to forge documents."},
-  {name:"Disguise Kit", price:25, desc:"Cosmetics, props", exotic:true, descFull:"Advantage on disguise checks."},
-  {name:"Thieves' Tools", price:25, desc:"Lockpicks, files", avail:"LQ", exotic:true, descFull:"Required to pick locks and disarm traps."},
-  {name:"Poisoner's Kit", price:50, desc:"Vials, toxins", avail:"NQ", exotic:true, descFull:"Crafting and applying poisons."}
-];
-const livestock = [
-  {name:"Cow (milk cow)", price:30, desc:"1 gallon milk/day"},
-  {name:"Ox (draft)", price:30, desc:"Heavy pulling"},
-  {name:"Pig", price:10, desc:"Fatten for slaughter / truffles"},
-  {name:"Sheep", price:8, desc:"Wool once per season"},
-  {name:"Goat", price:6, desc:"Milk, brush clearing"},
-  {name:"Chicken (dozen)", price:2, desc:"Egg layers"},
-  {name:"Riding Horse", price:75, desc:"Standard mount"},
-  {name:"Draft Horse", price:50, desc:"Work horse"},
-  {name:"Warhorse", price:400, desc:"Combat-trained", avail:"NQ"},
-  {name:"Pony", price:30, desc:"Small mount"},
-  {name:"Donkey", price:8, desc:"Pack animal"},
-  {name:"Saddle (Riding)", price:10, desc:"Standard saddle"},
-  {name:"Saddle (Military)", price:20, desc:"Combat saddle"},
-  {name:"Cart", price:15, desc:"Two-wheeled"},
-  {name:"Wagon", price:35, desc:"Covered wagon"},
-  {name:"Stabling (per day)", price:0.5, desc:"Per animal"}
-];
-const hirelings = [
-  {name:"Unskilled Laborer", price:0.2, desc:"per day, no special skills", unit:"day"},
-  {name:"Skilled Artisan", price:2, desc:"per day, blacksmith, carpenter, etc.", unit:"day"},
-  {name:"Mercenary (light foot)", price:1, desc:"per day, leather armor, simple weapons", unit:"day"},
-  {name:"Mercenary (heavy foot)", price:2, desc:"per day, chain, shield, martial weapons", unit:"day"},
-  {name:"Archer", price:2, desc:"per day, longbow, leather", unit:"day"},
-  {name:"Bodyguard (veteran)", price:4, desc:"per day, plate, shield, skilled", unit:"day"},
-  {name:"Scribe / Scholar", price:1.5, desc:"per day, reading/writing, research", unit:"day"},
-  {name:"Healer (adept)", price:3, desc:"per day, can use healer's kit, treat wounds", unit:"day"}
-];
-const apothecary = [
-  {name:"Potion of Healing (2d4+2)", price:50, avail:"LQ", exotic:true, descFull:"Standard healing draught."},
-  {name:"Potion of Greater Healing", price:150, avail:"LQ", exotic:true},
-  {name:"Potion of Superior Healing", price:450, avail:"NQ", exotic:true},
-  {name:"Antitoxin", price:50, avail:"LQ", exotic:true, desc:"Advantage on poison saves 1h"},
-  {name:"Elixir of Health", price:120, avail:"NQ", exotic:true},
-  {name:"Potion of Climbing", price:180, avail:"NQ", exotic:true},
-  {name:"Potion of Water Breathing", price:180, avail:"NQ", exotic:true},
-  {name:"Basic Poison (vial)", price:100, avail:"LQ", exotic:true},
-  {name:"Alchemist's Fire", price:50, exotic:true},
-  {name:"Holy Water", price:25, avail:"LQ", exotic:true}
-];
-const homebrewOils = [
-  {name:"Burning Oil", price:75, exotic:true, descFull:"1d4 fire/round, ignites surfaces"},
-  {name:"Frost Oil", price:75, exotic:true, desc:"1d4 cold, reduces speed"},
-  {name:"Silver Oil", price:20, exotic:true, desc:"Weapon counts as silvered 1h"},
-  {name:"Flametongue Oil", price:195, exotic:true, descFull:"+1d6 fire damage 1 min"}
-];
-const spellServices = [
-  {name:"Detect Magic (ritual)", price:10, desc:"Reveals magic 30ft"},
-  {name:"Identify", price:20, avail:"LQ"},
-  {name:"Lesser Restoration", price:40},
-  {name:"Remove Curse", price:90, avail:"LQ"},
-  {name:"Revivify (component incl)", price:300, avail:"NQ", desc:"Return creature to life"},
-  {name:"Speak with Dead", price:90, avail:"NQ"}
-];
-const magicItems = [
-  {name:"Potion of Healing", rarity:"Common", price:50, avail:"LQ", attunement:false, desc:"Healing 2d4+2"},
-  {name:"Spell Scroll (Cantrip)", rarity:"Common", price:50, attunement:false, desc:"One-use cantrip"},
-  {name:"Spell Scroll (1st Level)", rarity:"Common", price:100, attunement:false},
-  {name:"Wand of Magic Detection", rarity:"Uncommon", price:300, avail:"LQ", attunement:false, desc:"3 charges, detect magic"},
-  {name:"Bag of Holding", rarity:"Uncommon", price:400, avail:"NQ", attunement:false, desc:"500 lbs / 64 cu ft"},
-  {name:"Cloak of Billowing", rarity:"Common", price:60, attunement:false, desc:"Bonus action to billow"},
-  {name:"Moon-Touched Sword", rarity:"Common", price:75, avail:"LQ", attunement:false, desc:"Sheds moonlight"},
-  {name:"Gloves of Thievery", rarity:"Uncommon", price:300, attunement:true, desc:"+5 Sleight of Hand & lockpicking"},
-  {name:"Cap of Water Breathing", rarity:"Uncommon", price:250, attunement:false, desc:"Breathe underwater"}
-];
-const jokeItems = [
-  {name:"Squash-Sword (cushion blade)", price:12, avail:"LQ", exotic:true, desc:"1d4 bludgeoning, nonlethal. On crit: explodes"},
-  {name:"Dehydrated Cucumber Fettuccine Soup Cubes", price:3, exotic:true, desc:"0 nourishment. Tastes like regret."}
-];
+const categories = [];
+addCategory('Simple melee weapons', 'official', 'Club|0.1|1d4 bludgeoning; Dagger|2|1d4 piercing; Greatclub|0.2|1d8 bludgeoning; Handaxe|5|1d6 slashing; Javelin|0.5|1d6 piercing; Light Hammer|2|1d4 bludgeoning; Mace|5|1d6 bludgeoning; Quarterstaff|0.2|1d6 bludgeoning; Sickle|1|1d4 slashing; Spear|1|1d6 piercing');
+addCategory('Simple ranged weapons', 'official', 'Light Crossbow|25|1d8 piercing; Dart|0.05|1d4 piercing; Shortbow|25|1d6 piercing; Sling|0.1|1d4 bludgeoning');
+addCategory('Martial melee weapons', 'official', 'Battleaxe|10|1d8 slashing; Flail|10|1d8 bludgeoning; Glaive|20|1d10 slashing; Greataxe|30|1d12 slashing; Greatsword|50|2d6 slashing; Halberd|20|1d10 slashing; Lance|10|1d12 piercing; Longsword|15|1d8 slashing; Maul|10|2d6 bludgeoning; Morningstar|15|1d8 piercing; Pike|5|1d10 piercing; Rapier|25|1d8 piercing; Scimitar|25|1d6 slashing; Shortsword|10|1d6 piercing; Trident|5|1d6 piercing; War Pick|5|1d8 piercing; Warhammer|15|1d8 bludgeoning; Whip|2|1d4 slashing');
+addCategory('Martial ranged weapons', 'official', 'Blowgun|10|1 piercing; Hand Crossbow|75|1d6 piercing; Heavy Crossbow|50|1d10 piercing; Longbow|50|1d8 piercing; Net|1|Restrains target on hit (special)');
+addCategory('Armor & shields', 'official', 'Padded Armor|5|Light AC 11 + Dex; Leather Armor|10|Light AC 11 + Dex; Studded Leather Armor|45|Light AC 12 + Dex; Hide Armor|10|Medium AC 12 + Dex (max 2); Chain Shirt|50|Medium AC 13 + Dex (max 2); Scale Mail|50|Medium AC 14 + Dex (max 2); Breastplate|400|Medium AC 14 + Dex (max 2); Half Plate Armor|750|Medium AC 15 + Dex (max 2); Ring Mail|30|Heavy AC 14; Chain Mail|75|Heavy AC 16; Splint Armor|200|Heavy AC 17; Plate Armor|1500|Heavy AC 18; Shield|10|+2 AC');
+addCategory('Ammunition', 'official', 'Arrows (20)|1|; Blowgun Needles (50)|1|; Crossbow Bolts (20)|1|; Sling Bullets (20)|0.04|');
+addCategory('Adventuring gear', 'official', "Abacus|2|; Acid (vial)|25|; Alchemist's Fire (flask)|50|; Antitoxin (vial)|50|; Arcane Focus — Crystal|10|; Arcane Focus — Orb|20|; Arcane Focus — Rod|10|; Arcane Focus — Staff|5|; Arcane Focus — Wand|10|; Backpack|2|; Ball Bearings (1,000)|1|; Barrel|2|; Basket|0.4|; Bedroll|1|; Bell|1|; Blanket|0.5|; Block and Tackle|1|; Book|25|; Bottle, Glass|2|; Bucket|0.05|; Caltrops (20)|1|; Candle|0.01|; Case, Crossbow Bolt|1|; Case, Map or Scroll|1|; Chain (10 ft)|5|; Chalk (1 piece)|0.01|; Chest|5|; Climbers' Kit|25|; Clothes, Common|0.5|; Clothes, Costume|5|; Clothes, Fine|15|; Clothes, Traveler's|2|; Component Pouch|25|; Crowbar|2|; Druidic Focus — Sprig of Mistletoe|1|; Druidic Focus — Totem|1|; Druidic Focus — Wooden Staff|5|; Druidic Focus — Yew Wand|10|; Fishing Tackle|1|; Flask or Tankard|0.02|; Grappling Hook|2|; Hammer|1|; Hammer, Sledge|2|; Healer's Kit|5|10 uses; Holy Symbol — Amulet|5|; Holy Symbol — Emblem|5|; Holy Symbol — Reliquary|5|; Holy Water (flask)|25|; Hourglass|25|; Hunting Trap|5|; Ink (1 oz)|10|; Ink Pen|0.02|; Jug or Pitcher|0.02|; Ladder (10 ft)|0.1|; Lamp|0.5|; Lantern, Bullseye|10|; Lantern, Hooded|5|; Lock|10|; Magnifying Glass|100|; Manacles|2|; Mess Kit|0.2|; Mirror, Steel|5|; Oil (flask)|0.1|; Paper (sheet)|0.2|; Parchment (sheet)|0.1|; Perfume (vial)|5|; Pick, Miner's|2|; Piton|0.05|; Poison, Basic (vial)|100|; Pole (10 ft)|0.05|; Pot, Iron|2|; Potion of Healing|50|2d4 + 2 HP; Pouch|0.5|; Quiver|1|; Ram, Portable|4|; Rations (1 day)|0.5|; Robes|1|; Rope, Hempen (50 ft)|1|; Rope, Silk (50 ft)|10|; Sack|0.01|; Scale, Merchant's|5|; Sealing Wax|0.5|; Shovel|2|; Signal Whistle|0.05|; Signet Ring|5|; Soap|0.02|; Spellbook|50|; Spikes, Iron (10)|1|; Spyglass|1000|; Tent, Two-Person|2|; Tinderbox|0.5|; Torch|0.01|; Vial|1|; Waterskin|0.2|; Whetstone|0.01|");
+addCategory('Tools & kits', 'official', "Alchemist's Supplies|50|; Brewer's Supplies|20|; Calligrapher's Supplies|10|; Carpenter's Tools|8|; Cartographer's Tools|15|; Cobbler's Tools|5|; Cook's Utensils|1|; Glassblower's Tools|30|; Jeweler's Tools|25|; Leatherworker's Tools|5|; Mason's Tools|10|; Painter's Supplies|10|; Potter's Tools|10|; Smith's Tools|20|; Tinker's Tools|50|; Weaver's Tools|1|; Woodcarver's Tools|1|; Disguise Kit|25|; Forgery Kit|15|; Herbalism Kit|5|; Navigator's Tools|25|; Poisoner's Kit|50|; Thieves' Tools|25|; Dice Set|0.1|; Dragonchess Set|1|; Playing Card Set|0.5|; Three-Dragon Ante Set|1|; Bagpipes|30|; Drum|6|; Dulcimer|25|; Flute|2|; Lute|35|; Lyre|30|; Horn|3|; Pan Flute|12|; Shawm|2|; Viol|30|");
+addCategory('Equipment packs', 'official', "Burglar's Pack|16|; Diplomat's Pack|39|; Dungeoneer's Pack|12|; Entertainer's Pack|40|; Explorer's Pack|10|; Priest's Pack|19|; Scholar's Pack|40|");
+addCategory('Mounts, animals & tack', 'official', 'Camel|50|; Donkey or Mule|8|; Elephant|200|; Horse, Draft|50|; Horse, Riding|75|; Mastiff|25|; Pony|30|; Warhorse|400|; Bit and Bridle|2|; Carriage|100|; Cart|15|; Chariot|250|; Feed (per day)|0.05|; Saddle, Exotic|60|; Saddle, Military|20|; Saddle, Pack|5|; Saddle, Riding|10|; Saddlebags|4|; Stabling (per day)|0.5|; Wagon|35|');
+addCategory('Waterborne vehicles', 'official', 'Galley|30000|; Keelboat|3000|; Longship|10000|; Rowboat|50|; Sailing Ship|10000|; Warship|25000|');
+addCategory('Food, drink & lodging', 'official', 'Ale (gallon)|0.2|; Ale (mug)|0.04|; Banquet (per person)|10|; Bread (loaf)|0.02|; Cheese (hunk)|0.1|; Meat (chunk)|0.3|; Wine, Common (pitcher)|0.2|; Wine, Fine (bottle)|10|; Inn, Squalid (per day)|0.07|; Inn, Poor (per day)|0.1|; Inn, Modest (per day)|0.5|; Inn, Comfortable (per day)|0.8|; Inn, Wealthy (per day)|2|; Inn, Aristocratic (per day)|4|; Meals, Squalid (per day)|0.03|; Meals, Poor (per day)|0.06|; Meals, Modest (per day)|0.3|; Meals, Comfortable (per day)|0.5|; Meals, Wealthy (per day)|0.8|; Meals, Aristocratic (per day)|2|');
+addCategory('Services & travel', 'official', "Coach Cab (between towns, per mile)|0.03|; Coach Cab (within city, per mile)|0.01|; Hireling, Skilled (per day)|2|; Hireling, Untrained (per day)|0.2|; Messenger (per mile)|0.02|; Road or Gate Toll|0.01|; Ship's Passage (per mile)|0.1|");
+addCategory('Trade goods', 'official', 'Wheat (1 lb)|0.01|; Flour (1 lb)|0.02|; Chicken|0.02|; Salt (1 lb)|0.05|; Iron (1 lb)|0.1|; Canvas (1 sq yd)|0.1|; Copper (1 lb)|0.5|; Cotton Cloth (1 sq yd)|0.5|; Ginger (1 lb)|1|; Goat|1|; Cinnamon (1 lb)|2|; Pepper (1 lb)|2|; Sheep|2|; Cloves (1 lb)|3|; Pig|3|; Silver (1 lb)|5|; Linen (1 sq yd)|5|; Silk (1 sq yd)|10|; Cow|10|; Saffron (1 lb)|15|; Ox|15|; Gold (1 lb)|50|; Platinum (1 lb)|500|');
+addCategory('Healing & potions', 'priced', 'Potion of Greater Healing|150|4d4 + 4 HP; Potion of Superior Healing|450|8d4 + 8 HP; Potion of Supreme Healing|1350|10d4 + 20 HP; Potion of Climbing|180|Magic item; Potion of Water Breathing|180|Magic item; Elixir of Health|120|Magic item');
+addCategory('Spellcasting services', 'priced', 'Detect Magic (service)|10|Spellcaster for hire; Identify (service)|20|Spellcaster for hire; Lesser Restoration (service)|40|Spellcaster for hire; Remove Curse (service)|90|Spellcaster for hire; Revivify (service)|400|Includes 300 gp diamond, DM estimate; Speak with Dead (service)|90|Spellcaster for hire; Greater Restoration (service)|650|Includes material cost, DM estimate; Raise Dead (service)|750|Includes 500 gp diamond, DM estimate');
+addCategory('Magic items', 'priced', 'Spell Scroll (Cantrip)|50|; Spell Scroll (1st Level)|100|; Spell Scroll (2nd Level)|200|; Spell Scroll (3rd Level)|400|; Wand of Magic Detection|300|; Bag of Holding|400|; Cloak of Billowing|60|; Moon-Touched Sword|75|; Gloves of Thievery|300|; Cap of Water Breathing|250|');
+addCategory('Homebrew & novelty', 'homebrew', 'Burning Oil|75|Homebrew weapon oil; Frost Oil|75|Homebrew weapon oil; Silver Oil|20|Homebrew silvering oil; Flametongue Oil|195|Homebrew weapon oil; Squash-Sword|12|Joke weapon; Dehydrated Cucumber Fettuccine Soup Cubes|3|Zero nourishment');
 
-const generalStore = [...weapons, ...armors, ...gear, ...jokeItems];
-const categories = [
-  { id:"general", title:"🧰 General Store", items: generalStore },
-  { id:"livestock", title:"🐄 Livestock & Steeds", items: livestock },
-  { id:"hirelings", title:"⚔️ Hirelings & Labor (per day)", items: hirelings },
-  { id:"apothecary", title:"🧪 Apothecary & Potions", items: apothecary },
-  { id:"oils", title:"🔮 Homebrew Oils", items: homebrewOils },
-  { id:"services", title:"✨ Spellcasting Services", items: spellServices },
-  { id:"magic", title:"⭐ Magic Items (9 items)", items: magicItems }
-];
+function addCategory(title, source, raw){
+ const items=raw.split(';').map(s=>s.trim()).filter(Boolean).map(s=>{const [name,amount,desc='']=s.split('|');return {name,base:Number(amount),desc,source,category:title,id:title+'::'+name};});
+ categories.push({id:'cat-'+categories.length,title,source,items});
+}
+const storageKey='menuman-v2-settings';
+const state={market:'standard',category:'all',source:'all',search:'',coin:'gold',rural:1.25,city:.9,magic:true,quests:true,cart:new Map()};
+try { const s=JSON.parse(localStorage.getItem(storageKey)||'{}'); for(const k of ['market','category','source','coin','rural','city','magic','quests']) if(s[k]!==undefined) state[k]=s[k]; }catch(e){}
+function save(){try{localStorage.setItem(storageKey,JSON.stringify({market:state.market,category:state.category,source:state.source,coin:state.coin,rural:state.rural,city:state.city,magic:state.magic,quests:state.quests}));}catch(e){}}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function cents(gp){return Math.round(gp*100)}
+function unitPrice(item){let mult=state.market==='rural'?state.rural:state.market==='city'?state.city:1;if(item.source==='priced'&&!state.magic)mult=1;return Math.max(1,Math.round(cents(item.base)*mult));}
+function coin(cp,pref=state.coin){cp=Math.round(cp);if(!cp)return '0 gp';if(pref==='copper')return cp.toLocaleString()+' cp';if(pref==='silver')return (cp/10).toLocaleString(undefined,{maximumFractionDigits:1})+' sp';let gp=Math.floor(cp/100),sp=Math.floor(cp%100/10),c=cp%10;return [gp?gp.toLocaleString()+' gp':'',sp?sp+' sp':'',c?c+' cp':''].filter(Boolean).join(' · ');}
+function foundItems(cat){return cat.items.filter(i=>(state.source==='all'||i.source===state.source)&&(state.category==='all'||i.category===state.category)&&(`${i.name} ${i.desc} ${i.category}`).toLowerCase().includes(state.search));}
+function render(){
+ const nav=document.getElementById('navPills');nav.innerHTML=categories.filter(c=>foundItems(c).length).map(c=>`<a href="#${c.id}">${escapeHtml(c.title)}</a>`).join('');
+ let count=0;document.getElementById('catalogue').innerHTML=categories.map(c=>{const matches=foundItems(c);count+=matches.length;if(!matches.length)return '';return `<section class="section" id="${c.id}"><div class="sec-head"><span>${escapeHtml(c.title)}</span><span class="sec-count">${matches.length} items</span></div><div class="table-wrapper"><table><thead><tr><th>Merchandise</th><th>Local price</th><th>Notes</th><th>Add</th></tr></thead><tbody>${matches.map(item=>`<tr><td><strong>${escapeHtml(item.name)}</strong><span class="item-origin">${item.source==='official'?'2014 PHB list price':item.source==='priced'?'DM retail estimate':'Homebrew'}</span></td><td><span class="price-col">${coin(unitPrice(item),'gold')}</span></td><td class="item-desc">${escapeHtml(item.desc)}</td><td><button class="add-to-cart" data-id="${escapeHtml(item.id)}" title="Add to cart" aria-label="Add ${escapeHtml(item.name)}">+</button></td></tr>`).join('')}</tbody></table></div></section>`;}).join('')||'<div class="empty">Nothing matches those filters.</div>';
+ document.getElementById('resultCount').textContent=`${count} of ${categories.reduce((n,c)=>n+c.items.length,0)} items visible`;
+ const mult=state.market==='rural'?state.rural:state.market==='city'?state.city:1;document.getElementById('marketLabel').textContent=`${state.market[0].toUpperCase()+state.market.slice(1)} prices · ×${mult.toFixed(2)}`;
+ document.querySelectorAll('[data-market]').forEach(b=>b.classList.toggle('active',b.dataset.market===state.market));
+ document.getElementById('jobs').hidden=!state.quests;updateCart();
+}
+const allItems=new Map(categories.flatMap(cat=>cat.items.map(item=>[item.id,item])));
+function addToCart(id){if(!allItems.has(id))return;state.cart.set(id,(state.cart.get(id)||0)+1);updateCart();}
+function updateCart(){let total=0,count=0,parts=[];for(const [id,qty] of state.cart){const item=allItems.get(id);if(!item)continue;const subtotal=unitPrice(item)*qty;total+=subtotal;count+=qty;parts.push(`<span class="cart-line"><span>${qty} × ${escapeHtml(item.name)} (${coin(subtotal,'gold')})</span><button data-dec="${escapeHtml(id)}" aria-label="Remove one">−</button><button data-inc="${escapeHtml(id)}" aria-label="Add one">+</button></span>`);}
+ document.getElementById('cartSummary').innerHTML=parts.join('')||'🛒 Cart empty';document.getElementById('cartTotal').textContent=coin(total);document.getElementById('cartCount').textContent=count;document.querySelectorAll('[data-preference]').forEach(b=>b.classList.toggle('active',b.dataset.preference===state.coin));}
+function receipt(){let lines=["THE TRADESMAN'S LEDGER",`Market: ${state.market} | priced magic: ${state.magic?'adjusted':'fixed'}`,'--------------------------------'];let total=0;for(const [id,q] of state.cart){const item=allItems.get(id);if(!item)continue;let unit=unitPrice(item);total+=unit*q;lines.push(`${q} × ${item.name} @ ${coin(unit,'gold')} = ${coin(unit*q,'gold')}`)}if(!state.cart.size){alert('Cart empty');return;}lines.push('--------------------------------',`TOTAL: ${coin(total)}`);const t=lines.join('\n');if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(()=>alert('Receipt copied')).catch(()=>fallbackCopy(t));}else fallbackCopy(t);}
+function fallbackCopy(t){const el=document.createElement('textarea');el.value=t;document.body.appendChild(el);el.select();try{document.execCommand('copy');alert('Receipt copied')}catch(e){window.prompt('Copy receipt:',t)}el.remove();}
+function toggleCart(show){const el=document.getElementById('cartPanel');const visible=show===undefined?el.classList.contains('hidden'):show;el.classList.toggle('hidden',!visible);document.getElementById('cartToggleBtn').setAttribute('aria-expanded',String(visible));}
+function populateFilters(){let sel=document.getElementById('categoryFilter');sel.innerHTML='<option value="all">All departments</option>'+categories.map(c=>`<option value="${escapeHtml(c.title)}">${escapeHtml(c.title)}</option>`).join('');if(!categories.some(c=>c.title===state.category))state.category='all';sel.value=state.category;document.getElementById('sourceFilter').value=state.source;document.getElementById('ruralFactor').value=state.rural;document.getElementById('cityFactor').value=state.city;document.getElementById('adjustMagic').value=state.magic?'yes':'no';document.getElementById('showQuests').value=state.quests?'yes':'no';}
+const quests=[['⚀','Temple','Escort pilgrims, investigate a profaned shrine.'],['⚁','Merchant Guild','Guard a caravan, recover stolen merchandise.'],['⚂','Broker','Investigate a disappearance or retrieve missing documents.'],['⚃','Criminal Syndicate','Smuggling, black-market delivery, or an illicit heist.']];
+document.getElementById('questCards').innerHTML=quests.map(([face,title,desc])=>`<article style="background:#f9f2e6;border-radius:18px;padding:1rem;flex:1;min-width:180px;border-left:5px solid #b8864b"><strong>${face} ${title}</strong><p class="item-desc">${desc}</p></article>`).join('');
+document.getElementById('catalogue').addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b)addToCart(b.dataset.id)});
+document.getElementById('cartSummary').addEventListener('click',e=>{const b=e.target.closest('[data-dec],[data-inc]');if(!b)return;const id=b.dataset.dec||b.dataset.inc;if(b.hasAttribute('data-inc'))addToCart(id);else{let n=(state.cart.get(id)||0)-1;if(n<=0)state.cart.delete(id);else state.cart.set(id,n);updateCart();}});
+document.getElementById('searchInput').addEventListener('input',e=>{state.search=e.target.value.toLowerCase().trim();render()});
+document.getElementById('categoryFilter').addEventListener('change',e=>{state.category=e.target.value;save();render()});
+document.getElementById('sourceFilter').addEventListener('change',e=>{state.source=e.target.value;save();render()});
+document.getElementById('markets').addEventListener('click',e=>{const b=e.target.closest('[data-market]');if(!b)return;state.market=b.dataset.market;save();render()});
+for(const [id,key] of [['ruralFactor','rural'],['cityFactor','city']])document.getElementById(id).addEventListener('change',e=>{let n=Number(e.target.value);if(!Number.isFinite(n)||n<.1||n>10){e.target.value=state[key];return;}state[key]=n;save();render()});
+document.getElementById('adjustMagic').addEventListener('change',e=>{state.magic=e.target.value==='yes';save();render()});
+document.getElementById('showQuests').addEventListener('change',e=>{state.quests=e.target.value==='yes';save();render()});
+document.getElementById('coinSplitGroup').addEventListener('click',e=>{const b=e.target.closest('[data-preference]');if(!b)return;state.coin=b.dataset.preference;save();updateCart()});
+document.getElementById('cartToggleBtn').addEventListener('click',()=>toggleCart());document.getElementById('closeCartBtn').addEventListener('click',()=>toggleCart(false));document.getElementById('clearCartBtn').addEventListener('click',()=>{state.cart.clear();updateCart()});document.getElementById('copyReceiptBtn').addEventListener('click',receipt);
+populateFilters();render();
 
-// ---------- Helper: format price without decimals if whole number ----------
-function formatPrice(value) {
-  if (value === Math.floor(value)) return `${value} gp`;
-  return `${value.toFixed(2)} gp`;
-}
-
-// ---------- CART ----------
-let cartMap = new Map();
-function addToCart(name, price) {
-  if (cartMap.has(name)) {
-    let entry = cartMap.get(name);
-    entry.quantity += 1;
-    cartMap.set(name, entry);
-  } else {
-    cartMap.set(name, { price, quantity: 1 });
-  }
-  updateCartUI();
-}
-function removeOneFromCart(name) {
-  if (cartMap.has(name)) {
-    let entry = cartMap.get(name);
-    if (entry.quantity > 1) entry.quantity -= 1;
-    else cartMap.delete(name);
-  }
-  updateCartUI();
-}
-function clearCart() { cartMap.clear(); updateCartUI(); }
-function getTotalGold() {
-  let total = 0;
-  for (let e of cartMap.values()) total += e.price * e.quantity;
-  return total;
-}
-function formatCoin(total, pref) {
-  if (total === 0) return "0 gp";
-  let cp = Math.round(total * 100);
-  let gp = Math.floor(cp / 100);
-  let sp = Math.floor((cp % 100) / 10);
-  let c = cp % 10;
-  let parts = [];
-  if (pref === "gold") {
-    if (gp) parts.push(`${gp} gp`);
-    if (sp) parts.push(`${sp} sp`);
-    if (c) parts.push(`${c} cp`);
-  } else if (pref === "silver") {
-    let totalSilver = gp*10 + sp + c/10;
-    let sv = Math.floor(totalSilver);
-    let rem = Math.round((totalSilver - sv)*10);
-    if (sv) parts.push(`${sv} sp`);
-    if (rem) parts.push(`${rem} cp`);
-  } else if (pref === "copper") {
-    parts.push(`${Math.round(total*100)} cp`);
-  } else {
-    if (gp) parts.push(`${gp} gp`);
-    if (sp) parts.push(`${sp} sp`);
-    if (c) parts.push(`${c} cp`);
-  }
-  return parts.join(" · ");
-}
-let coinPref = "gold";
-function updateCartUI() {
-  const total = getTotalGold();
-  document.getElementById("cartTotal").innerText = formatCoin(total, coinPref);
-  const cartDiv = document.getElementById("cartSummary");
-  if (cartMap.size === 0) {
-    cartDiv.innerHTML = "🛒 Cart empty";
-  } else {
-    let html = "";
-    for (let [name, entry] of cartMap.entries()) {
-      let itemTotal = entry.price * entry.quantity;
-      html += `<span style="background:#3e3228; padding:4px 12px; border-radius:30px; display:inline-flex; gap:6px; align-items:center; margin:2px;">
-        ${entry.quantity}× ${name} (${formatPrice(itemTotal)})
-        <button class="remove-one" data-name="${name.replace(/"/g, '&quot;')}" style="background:none; border:none; color:#dba959; cursor:pointer;">−</button>
-      </span>`;
-    }
-    cartDiv.innerHTML = html;
-    document.querySelectorAll('.remove-one').forEach(btn => {
-      btn.addEventListener('click', () => removeOneFromCart(btn.getAttribute('data-name')));
-    });
-  }
-  document.querySelectorAll('[data-preference]').forEach(btn => {
-    if (btn.dataset.preference === coinPref) btn.classList.add('active');
-    else btn.classList.remove('active');
-  });
-}
-function copyReceipt() {
-  if (cartMap.size === 0) { alert("Cart empty."); return; }
-  let receipt = "🧾 TRADESMAN'S LEDGER RECEIPT\n--------------------------------\n";
-  for (let [name, entry] of cartMap.entries()) {
-    let itemTotal = entry.price * entry.quantity;
-    receipt += `${entry.quantity} × ${name} — ${formatPrice(itemTotal)}\n`;
-  }
-  receipt += "--------------------------------\n";
-  receipt += `TOTAL: ${formatCoin(getTotalGold(), coinPref)}\nSplit: ${coinPref} first\nThank you!`;
-  // Use modern clipboard API with fallback
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(receipt).then(() => alert("Receipt copied!")).catch(() => alert("Could not copy receipt."));
-  } else {
-    // fallback for older browsers
-    const textarea = document.createElement("textarea");
-    textarea.value = receipt;
-    document.body.appendChild(textarea);
-    textarea.select();
-    document.execCommand("copy");
-    document.body.removeChild(textarea);
-    alert("Receipt copied!");
-  }
-}
-let cartVisible = true;
-function toggleCart() {
-  const panel = document.getElementById('cartPanel');
-  cartVisible = !cartVisible;
-  if (cartVisible) {
-    panel.classList.remove('hidden');
-  } else {
-    panel.classList.add('hidden');
-  }
-}
-
-// ---------- RENDER ----------
-function renderCatalog(search = "") {
-  const container = document.getElementById('catalogue');
-  let html = "";
-  for (let cat of categories) {
-    let filtered = cat.items.filter(i => i.name.toLowerCase().includes(search.toLowerCase()));
-    if (!filtered.length) continue;
-    html += `<div class="section" id="${cat.id}"><div class="sec-head">${cat.title}</div><div class="sec-desc">${cat.id==='magic'?'Attunement notes where applicable.':cat.id==='hirelings'?'Daily rates, no long-term commitment.':'Standard wares.'}</div><div class="table-wrapper"><table><thead><tr><th>Item</th><th>Price</th><th>Details</th><th></th></tr></thead><tbody>`;
-    for (let item of filtered) {
-      let availHtml = "";
-      if (item.avail === "LQ") availHtml = `<span class="badge lq-badge">LQ</span>`;
-      else if (item.avail === "NQ") availHtml = `<span class="badge nq-badge">NQ</span>`;
-      let detail = "";
-      if (item.attunement !== undefined) detail += (item.attunement ? "Attunement ✓ " : "No attunement ");
-      if (item.desc) detail += item.desc;
-      else if (item.descFull) detail += item.descFull;
-      else if (item.unit) detail += `${item.unit} rate`;
-      let showTooltip = item.exotic || item.name.includes("Kit") || item.name.includes("Potion") || item.name.includes("Oil") || item.name.includes("Scroll") || item.name.includes("Wand") || item.name.includes("Bag") || item.name.includes("Gloves") || item.name.includes("Cap") || item.name.includes("Squash");
-      let displayName = item.name;
-      if (showTooltip && (item.descFull || item.desc)) {
-        let tip = (item.descFull || item.desc || detail).replace(/"/g, '&quot;');
-        displayName = `<span class="hover-info" data-desc="${tip}">${item.name}</span>`;
-      }
-      html += `<tr>
-        <td>${displayName}${availHtml}</td>
-        <td><span class="price-col">${formatPrice(item.price)}</span></td>
-        <td class="nc">${detail}</td>
-        <td><button class="add-to-cart" data-name="${item.name.replace(/"/g, '&quot;')}" data-price="${item.price}" style="background:#e7d9c8; border:none; border-radius:30px; width:32px; height:32px; font-size:1.2rem; cursor:pointer;">+</button></td>
-      </tr>`;
-    }
-    html += `</tbody></table></div></div>`;
-  }
-  container.innerHTML = html;
-  document.querySelectorAll('.add-to-cart').forEach(btn => {
-    btn.addEventListener('click', () => {
-      addToCart(btn.getAttribute('data-name'), parseFloat(btn.getAttribute('data-price')));
-    });
-  });
-}
-
-function renderSideQuests() {
-  const quests = [
-    { face:"⚀ 1", title:"Temple / Officiate", desc:"Official tasks – escort pilgrims, cleanse shrines. Pay: Renown + gold." },
-    { face:"⚁ 2", title:"Merchant Guild", desc:"Caravan protection, debt collection. Solid coin & influence." },
-    { face:"⚂ 3", title:"Under‑the‑Table Broker", desc:"Retrieval, spying. High pay, neutral rep." },
-    { face:"⚃ 4", title:"Criminal Syndicate", desc:"Heists, smuggling. Lucrative but illegal; risk infamy." }
-  ];
-  let qHtml = `<div class="section" id="jobs"><div class="sec-head">📜 Side Quest Outlines (d4)</div><div class="sec-desc">Roll a d4 or ask your DM — each represents a category of work in most towns.</div><div style="display:flex; flex-wrap:wrap; gap:1rem; padding:1rem;">`;
-  for (let q of quests) {
-    qHtml += `<div style="background:#f9f2e6; border-radius:24px; padding:1rem; flex:1; min-width:180px; border-left:6px solid #b8864b;"><div style="font-size:1.8rem;">${q.face}</div><div style="font-weight:bold;">${q.title}</div><div style="font-size:0.8rem; color:#5e4a34;">${q.desc}</div></div>`;
-  }
-  qHtml += `</div></div>`;
-  document.getElementById('catalogue').insertAdjacentHTML('beforeend', qHtml);
-}
-
-// event binding
-document.getElementById('searchInput').addEventListener('input', (e) => renderCatalog(e.target.value));
-document.querySelectorAll('[data-preference]').forEach(btn => {
-  btn.addEventListener('click', () => {
-    coinPref = btn.dataset.preference;
-    updateCartUI();
-  });
-});
-document.getElementById('clearCartBtn').addEventListener('click', clearCart);
-document.getElementById('copyReceiptBtn').addEventListener('click', copyReceipt);
-document.getElementById('cartToggleBtn').addEventListener('click', toggleCart);
-
-renderCatalog("");
-renderSideQuests();
-updateCartUI();
-</script>
-</body>
-</html>
+</script></body></html>
